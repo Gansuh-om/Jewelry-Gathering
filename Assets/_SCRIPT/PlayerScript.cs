@@ -9,14 +9,5 @@ public class PlayerScript : MonoBehaviour
     private void Update()
     {
         player.SetDestination(target.position);
-        if (Input.GetKeyDown("a"))
-        {
-            MoveIt();
-        }
-    }
-
-    private void MoveIt()
-    {
-        
     }
 }
