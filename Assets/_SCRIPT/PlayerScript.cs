@@ -5,9 +5,14 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     [SerializeField] private UnityEngine.AI.NavMeshAgent player;
-    [SerializeField] private Transform target;
+    private Transform _target;
     private void Update()
     {
-        player.SetDestination(target.position);
+        player.SetDestination(_target.position);
+    }
+
+    public void SetTarget(Transform value)
+    {
+        _target = value;
     }
 }

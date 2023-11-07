@@ -19,7 +19,9 @@ public class Upgrades : MonoBehaviour
 {
     public static Upgrades Instance;
     public Upgrade[] upgrade = new Upgrade[3];
-    [SerializeField] private Attractor attractor;
+    // [SerializeField] private Attractor attractor;
+    
+    [SerializeField] private CarMain carMain;
     
     [SerializeField] private TextMeshProUGUI radiusUpgrade;
     [SerializeField] private TextMeshProUGUI capacityUpgrade;
@@ -39,7 +41,11 @@ public class Upgrades : MonoBehaviour
             upgrade[index].value += upgrade[index].increaseLvlValue;
             upgrade[index].lvl++;
             upgrade[index].index = 0;
-            PlayerLevelUp();
+            if (index==0)
+            {
+                PlayerLevelUp();
+                carMain.SetInt(upgrade[index].lvl);
+            }
         }
         else
         {
@@ -48,16 +54,16 @@ public class Upgrades : MonoBehaviour
         switch (index)
         {
             case 0:
-                attractor.ChangeRadius(upgrade[index].value);
+                carMain.ChangeRadius(upgrade[index].value);
                 break;
             case 1:
-                attractor.ChangeCount((int)upgrade[index].value);
+                carMain.ChangeCount((int)upgrade[index].value);
                 break;
             default:
                 break;
         }
         ShowUpgrade();
-        attractor.SetPower(upgrade[index].lvl);
+        // attractor.SetPower(upgrade[index].lvl);
     }
 
     private void ShowUpgrade()

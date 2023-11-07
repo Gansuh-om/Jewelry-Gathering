@@ -15,7 +15,8 @@ public class Attractor : MonoBehaviour
     private bool _endCheck;
     private List<Transform> _collected = new List<Transform>();
     private List<Transform> _collecting = new List<Transform>();
-    [SerializeField] private Transform offloadSpot;
+    private Transform _offloadSpot;
+    private GameObject _upgradeUI;
     public int maxCount=5;
     public int power;
 
@@ -97,6 +98,19 @@ public class Attractor : MonoBehaviour
                 return;
             ReleaseCollected();
         }
+
+        if (other.CompareTag("Upgrade"))
+        {
+            _upgradeUI.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Upgrade"))
+        {
+            _upgradeUI.SetActive(false);
+        }
     }
 
     public void ReleaseCollected()
@@ -104,7 +118,7 @@ public class Attractor : MonoBehaviour
         _counter = 0;
         for (int i = 0; i < _collected.Count; i++)
         {
-            _collected[i].DOMove(offloadSpot.position, 0.25f).SetDelay(i * 0.025f);
+            _collected[i].DOMove(_offloadSpot.position, 0.25f).SetDelay(i * 0.025f);
             if (i == _collected.Count - 1)
             {
                 RemoveListItems();
@@ -116,7 +130,7 @@ public class Attractor : MonoBehaviour
     {
         foreach (var col in _collected)
         {
-            col.parent = offloadSpot;
+            col.parent = _offloadSpot;
         }
         for (int i = 0; i < _collected.Count; i++)
         {
@@ -132,5 +146,11 @@ public class Attractor : MonoBehaviour
     public void ChangeRadius(float value)
     {
         attractionRadius = value;
+    }
+
+    public void StartSet(Transform offload, GameObject upgradeUi)
+    {
+        _offloadSpot = offload;
+        _upgradeUI = upgradeUi;
     }
 }

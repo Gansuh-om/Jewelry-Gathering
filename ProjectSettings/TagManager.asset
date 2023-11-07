@@ -8,6 +8,7 @@ TagManager:
   - Collected
   - Collecting
   - OffloadSpot
+  - Upgrade
   layers:
   - Default
   - TransparentFX

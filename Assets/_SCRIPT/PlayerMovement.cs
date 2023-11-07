@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Transform target;
-    [SerializeField] private Transform player;
+    private Transform _player;
 
     private bool _hold;
     
@@ -26,8 +26,8 @@ public class PlayerMovement : MonoBehaviour
         {
             var horizontalInput = CnInputManager.GetAxis("Horizontal");
             var verticalInput = CnInputManager.GetAxis("Vertical");
-            var value = Mathf.Clamp(player.position.x - target.position.x + horizontalInput, -1, 1);
-            var value2 = Mathf.Clamp(player.position.z - target.position.z + verticalInput, -1, 1);
+            var value = Mathf.Clamp(_player.position.x - target.position.x + horizontalInput, -1, 1);
+            var value2 = Mathf.Clamp(_player.position.z - target.position.z + verticalInput, -1, 1);
             target.position = new Vector3(target.position.x+value, target.localPosition.y, target.position.z+value2);
         }
     }
@@ -38,5 +38,10 @@ public class PlayerMovement : MonoBehaviour
 
         // Then, map the normalized value to the target range (toMin to toMax).
         return Mathf.Lerp(toMin, toMax, normalizedValue);
+    }
+
+    public void ChangePlayer(GameObject value)
+    {
+        _player = value.transform;
     }
 }
