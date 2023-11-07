@@ -23,6 +23,7 @@ public class CarMain : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
+    [SerializeField] private Offloading offloading;
 
     private int _id;
     private float _radius=4;
