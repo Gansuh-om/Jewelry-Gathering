@@ -118,7 +118,9 @@ public class Attractor : MonoBehaviour
         _counter = 0;
         for (int i = 0; i < _collected.Count; i++)
         {
-            _collected[i].DOMove(_offloadSpot.position, 0.25f).SetDelay(i * 0.025f);
+            _collected[i].DOMove(_offloadSpot.position, 0.25f).SetDelay(i * 0.025f).OnComplete(()=>{
+                _offloadSpot.parent.parent.GetComponent<Offloading>().DispenseMoney(1);
+            });
             if (i == _collected.Count - 1)
             {
                 RemoveListItems();
