@@ -72,7 +72,7 @@ public class Attractor : MonoBehaviour
                 Vector3 attractionDirection = transform.position - _collecting[i].position;
                 float distance = attractionDirection.magnitude;
 
-                if (distance > 0.5f) // Avoid division by zero
+                if (distance > 0.5f) 
                 {
                     attractionDirection /= distance;
                     float force = attractionForce / distance;
@@ -112,7 +112,7 @@ public class Attractor : MonoBehaviour
             _upgradeUI.SetActive(false);
         }
     }
-
+    private int _tempInd;
     public void ReleaseCollected()
     {
         _counter = 0;
@@ -120,11 +120,15 @@ public class Attractor : MonoBehaviour
         {
             _collected[i].DOMove(_offloadSpot.position, 0.25f).SetDelay(i * 0.025f).OnComplete(()=>{
                 _offloadSpot.parent.parent.GetComponent<Offloading>().DispenseMoney(1);
+                _collected[_tempInd].gameObject.SetActive(false);
+                _tempInd++;
+                Debug.Log($"{_tempInd} - {_collected.Count}");
+                if (_tempInd == _collected.Count - 1)
+                {
+                    RemoveListItems();
+                    _tempInd = 0;
+                }
             });
-            if (i == _collected.Count - 1)
-            {
-                RemoveListItems();
-            }
         }
     }
 

@@ -157,7 +157,7 @@ Material:
     - _FresnelColor: {r: 0.25, g: 0.25, b: 0.25, a: 1}
     - _ShadowTint: {r: 0, g: 0.0870144, b: 0.4528302, a: 1}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SpecularColor: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
+    - _SpecularColor: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &2474376684867546734
 MonoBehaviour:

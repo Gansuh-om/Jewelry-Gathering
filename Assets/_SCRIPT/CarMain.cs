@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
-
 [Serializable]
 struct CarsParts
 {
@@ -24,6 +23,8 @@ public class CarMain : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private Offloading offloading;
+
+    [SerializeField] private GameObject text;
 
     private int _id;
     private float _radius=4;
@@ -53,6 +54,10 @@ public class CarMain : MonoBehaviour
         carPartsArray[_id].attractor.ChangeCount(_count);
         carPartsArray[_id].playerScript.SetTarget(target);
         carPartsArray[_id].attractor.StartSet(offloadSpot,upgradeUI);
+        if(_id!=0){
+            carPartsArray[_id].car.transform.GetChild(0).transform.position = carPartsArray[_id - 1].car.transform.GetChild(0).transform.position;
+            carPartsArray[_id].car.transform.GetChild(0).transform.rotation = carPartsArray[_id - 1].car.transform.GetChild(0).transform.rotation;
+        }
     }
 
     public void SetInt(int value)
@@ -72,5 +77,11 @@ public class CarMain : MonoBehaviour
     {
         _count = value;
         carPartsArray[_id].attractor.ChangeCount(value);
+    }
+    public void ShowText(Transform value){
+        var position = new Vector3(UnityEngine.Random.Range(-1f, 1), 3.32f, UnityEngine.Random.Range(-1, 1));
+        var temp = Instantiate(text);
+        temp.transform.position = value.position+position;
+        temp.SetActive(true);
     }
 }
