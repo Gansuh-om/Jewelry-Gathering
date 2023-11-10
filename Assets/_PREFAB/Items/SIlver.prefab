@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5570059033026742395}
   - component: {fileID: 332790526775556722}
   - component: {fileID: 4037713615352649690}
+  - component: {fileID: 7092118688231307108}
   m_Layer: 0
   m_Name: SIlver
   m_TagString: Attractable
@@ -27,9 +28,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5550918412235406953}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.5, y: 0, z: -3.88}
-  m_LocalScale: {x: 1.7, y: 1.7, z: 1.7}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1691399251696214424}
@@ -113,6 +114,22 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 7074421596601233355, guid: fe95b6fc7e63d465d8ba2f8c1112cbb7, type: 3}
+--- !u!208 &7092118688231307108
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5550918412235406953}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.31, y: 0.1, z: 0.31}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &1221522049605535347
 PrefabInstance:
   m_ObjectHideFlags: 0

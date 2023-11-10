@@ -1863,8 +1863,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 2671671177768555067}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 7
+  m_Radius: 1.57
+  m_Speed: 20
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -1875,7 +1875,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &6607216356566838892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1935,8 +1935,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 2767149098883107937}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 7
+  m_Radius: 1.61
+  m_Speed: 20
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -1947,7 +1947,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &1630605810867175324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3206,8 +3206,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 4154993077334745586}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 7
+  m_Radius: 2.2
+  m_Speed: 20
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -3218,7 +3218,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &3668485005897865843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5198,8 +5198,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 6423055456859782909}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 7
+  m_Radius: 1.7
+  m_Speed: 20
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -5210,7 +5210,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &3055841675345460927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5441,8 +5441,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 6630114261033157077}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 7
+  m_Radius: 2.44
+  m_Speed: 20
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -5453,7 +5453,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &5105901825881139658
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -83,6 +83,7 @@ public class Attractor : MonoBehaviour
                     _collecting[i].transform.parent = transform;
                     _collecting[i].tag = "Collected";
                     _collected.Add(_collecting[i]);
+                    _collecting[i].GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = false;
                     _collecting.Remove(_collecting[i]);
                     break;
                 }

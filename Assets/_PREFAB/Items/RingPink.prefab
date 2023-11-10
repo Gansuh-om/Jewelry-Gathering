@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2492537690772581519}
   - component: {fileID: 1851095080891446053}
   - component: {fileID: 3904835677496153885}
+  - component: {fileID: 5240580743459617569}
   m_Layer: 0
   m_Name: RingPink
   m_TagString: Attractable
@@ -27,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5968627691934640069}
-  m_LocalRotation: {x: -0.16272192, y: -0.76811147, z: 0.07750788, w: 0.6144256}
+  m_LocalRotation: {x: -0.16272502, y: -0.76811194, z: 0.07750789, w: 0.6144242}
   m_LocalPosition: {x: -8.81, y: 0.0000038146973, z: 17.48}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
@@ -113,3 +114,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
+--- !u!208 &5240580743459617569
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5968627691934640069}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.17, y: 0.27, z: 0.17}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.53800005, z: -0.018000001}
+  m_TimeToStationary: 0.5
