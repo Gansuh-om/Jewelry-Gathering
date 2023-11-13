@@ -12,6 +12,7 @@ Material:
   m_ValidKeywords:
   - _ADDITIONAL_LIGHTS_ENABLED
   - _ANISO_SPECULAR
+  - _EMISSION
   - _ENVIRONMENT_LIGHTING_ENABLED
   - _FOG
   - _FRESNEL
@@ -109,7 +110,7 @@ Material:
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Emission: 0
+    - _Emission: 1
     - _EnvironmentLightingEnabled: 1
     - _EnvironmentReflections: 1
     - _Fog: 1
@@ -151,7 +152,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0.99831486, g: 0, b: 1, a: 1}
     - _Color: {r: 0, g: 0.24022317, b: 1, a: 1}
-    - _EmissionColor: {r: 0.010296631, g: 0, b: 0.3764706, a: 1}
+    - _EmissionColor: {r: 0.09461041, g: 0, b: 3.0117645, a: 1}
     - _FresnelColor: {r: 0, g: 1, b: 0.94251156, a: 1}
     - _ShadowTint: {r: 0.5019608, g: 0, b: 0.048991367, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}

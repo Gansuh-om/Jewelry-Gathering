@@ -30,7 +30,7 @@ public class Offloading : MonoBehaviour
             started.transform.position = moneyFrom.position;
             started.transform.DOLocalRotate(new Vector3(0,90,0),0.1f);
             if(i!=0){
-                started.transform.DOMove(moneyTo.transform.position,0.5f).SetDelay(_tempId*0.1f).OnComplete(()=>{
+                started.transform.DOMove(moneyTo.transform.position,0.5f).SetDelay(i*0.1f).OnComplete(()=>{
                     started.transform.DOMove(moneyDropLocations[_tempId].position+_tempVec,0.1f).OnComplete(()=>{
                         started.GetComponent<Rigidbody>().isKinematic=false;
                         // started.transform.DOMove(started.transform.position-_tempVec,0.1f).OnComplete(()=>{
@@ -42,8 +42,7 @@ public class Offloading : MonoBehaviour
                     }
                 });
             }else{
-                
-                started.transform.DOMove(moneyTo.transform.position,0.5f).OnComplete(()=>{
+                started.transform.DOMove(moneyTo.transform.position,0.5f).SetDelay(i*0.1f).OnComplete(()=>{
                     started.transform.DOMove(moneyDropLocations[_tempId].position+_tempVec,0.1f).OnComplete(()=>{
                         started.GetComponent<Rigidbody>().isKinematic=false;
                         // started.transform.DOMove(started.transform.position-_tempVec,0.1f).OnComplete(()=>{

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.UI;
 using UnityEngine;
 
 [Serializable]
@@ -13,6 +14,7 @@ public struct Upgrade
     public float value;
     public float increaseValue;
     public float increaseLvlValue;
+    public Image sprite;
 }
 
 public class Upgrades : MonoBehaviour
@@ -36,20 +38,27 @@ public class Upgrades : MonoBehaviour
     public void Upgrade(int index)
     {
         upgrade[index].index++;
-        if (upgrade[index].index == 5)
+        if (upgrade[index].index == 5&&upgrade[index].lvl<5)
         {
             upgrade[index].value += upgrade[index].increaseLvlValue;
             upgrade[index].lvl++;
             upgrade[index].index = 0;
-            if (index==0)
-            {
-                PlayerLevelUp();
-                carMain.SetInt(upgrade[index].lvl);
-            }
+            upgrade[index].sprite.fillAmount = 1;
+            // if (index==0)
+            // {
+                
+            // }
         }
         else
         {
-            upgrade[index].value += upgrade[index].increaseValue;
+            var currentUpgrade = upgrade[index];
+            currentUpgrade.value += currentUpgrade.increaseValue;
+
+            var remappedValue = PlayerMovement.Remap(currentUpgrade.index, 0, 5, 0, 1);
+            currentUpgrade.sprite.fillAmount = remappedValue;
+            Debug.Log(remappedValue);
+
+            // currentUpgrade.sprite.DOFill(remappedValue, 0.5f);
         }
         switch (index)
         {
@@ -60,6 +69,9 @@ public class Upgrades : MonoBehaviour
                 carMain.ChangeCount((int)upgrade[index].value);
                 break;
             default:
+                upgrade[index].lvl++;
+                PlayerLevelUp();
+                carMain.SetInt(upgrade[index].lvl); 
                 break;
         }
         ShowUpgrade();

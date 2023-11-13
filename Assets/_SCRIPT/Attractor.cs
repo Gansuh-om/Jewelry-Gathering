@@ -114,22 +114,42 @@ public class Attractor : MonoBehaviour
         }
     }
     private int _tempInd;
+    private int _counterInside;
     public void ReleaseCollected()
     {
         _counter = 0;
-        for (int i = 0; i < _collected.Count; i++)
+        _counterInside = 0;
+        // for (int i = 0; i < _collected.Count; i++)
+        // {
+        //     _collected[i].DOMove(_offloadSpot.position, 0.25f).SetDelay(i * 0.025f).OnComplete(()=>{
+        //         _collected[_tempInd].gameObject.SetActive(false);
+        //         _tempInd++;
+        //         _counterInside++;
+        //         if (_counterInside == _collected.Count - 1)
+        //         {
+                    
+        //             RemoveListItems();
+        //             _tempInd = 0;
+        //         }
+        //     });
+        // }
+        int collectedCount = _collected.Count;
+        for (int i = 0; i < collectedCount; i++)
         {
-            _collected[i].DOMove(_offloadSpot.position, 0.25f).SetDelay(i * 0.025f).OnComplete(()=>{
-                _offloadSpot.parent.parent.GetComponent<Offloading>().DispenseMoney(1);
-                _collected[_tempInd].gameObject.SetActive(false);
-                _tempInd++;
-                Debug.Log($"{_tempInd} - {_collected.Count}");
-                if (_tempInd == _collected.Count - 1)
+            Transform currentTransform = _collected[i];
+            
+            currentTransform.DOMove(_offloadSpot.position, 0.25f)
+                .SetDelay(i * 0.025f)
+                .OnComplete(() =>
                 {
-                    RemoveListItems();
-                    _tempInd = 0;
-                }
-            });
+                    currentTransform.gameObject.SetActive(false);
+                    _counterInside++;
+
+                    if (_counterInside == collectedCount)
+                    {
+                        RemoveListItems();
+                    }
+                });
         }
     }
 
@@ -139,10 +159,12 @@ public class Attractor : MonoBehaviour
         {
             col.parent = _offloadSpot;
         }
-        for (int i = 0; i < _collected.Count; i++)
-        {
-            _collected.RemoveAt(0);
-        }
+        _offloadSpot.parent.parent.GetComponent<Offloading>().DispenseMoney(_collected.Count);
+        // for (int i = 0; i < _collected.Count; i++)
+        // {
+        //     _collected.RemoveAt(0);
+        // }
+        _collected.Clear();
     }
 
     public void ChangeCount(int value)

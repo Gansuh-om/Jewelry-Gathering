@@ -153,7 +153,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0.19803922, g: 0.19803922, b: 0.19803922, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _FresnelColor: {r: 0.25, g: 0.25, b: 0.25, a: 1}
     - _ShadowTint: {r: 0, g: 0.0870144, b: 0.4528302, a: 1}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
