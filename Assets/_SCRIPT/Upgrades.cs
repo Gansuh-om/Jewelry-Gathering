@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using UnityEngine.UI;
@@ -15,6 +16,9 @@ public struct Upgrade
     public float increaseValue;
     public float increaseLvlValue;
     public Image sprite;
+    public TextMeshProUGUI text;
+    public int initialCost;
+    public int increaseCost;
 }
 
 public class Upgrades : MonoBehaviour
@@ -29,36 +33,104 @@ public class Upgrades : MonoBehaviour
     [SerializeField] private TextMeshProUGUI capacityUpgrade;
     
     [SerializeField] private List<Transform> playerParts;
+    
+    [SerializeField] private TextMeshProUGUI moneyUi;
+    
+    public int money;
     private void Awake()
     {
         Instance = this;
         ShowUpgrade();
+        moneyUi.text = money.ToString();
+        for (int i = 0; i < upgrade.Length; i++)
+        {
+            upgrade[i].text.text = upgrade[i].increaseCost.ToString();
+        }
     }
 
+    public async void IncreaseMoney(int value)
+    {
+        money += value;
+        moneyUi.color = Color.green;
+        for (int i = value; i > 0; i--)
+        {
+            // money++;
+            moneyUi.text = (money - i).ToString();
+            await Task.Delay(50);
+        }
+        moneyUi.color = Color.white;
+    }
+    public async void DecreaseMoney(int value)
+    {
+        money -= value;
+        moneyUi.color = Color.red;
+        for (int i = value; i > 0; i--)
+        {
+            // money--;
+            moneyUi.text = (money + i).ToString();
+            await Task.Delay(1);
+        }
+        moneyUi.color = Color.white;
+    }
     public void Upgrade(int index)
     {
+
+        if (money < upgrade[index].initialCost)
+        {
+            return;
+        }
+        Debug.Log(upgrade[index].lvl);
+        if (upgrade[index].lvl >= 5)
+        {
+            upgrade[index].text.text = "MAXED";
+            return;
+        }
+
+        if (index == 2)
+        {
+            if (upgrade[index].lvl >= 4)
+            {
+                upgrade[index].text.text = "MAXED";
+                return;
+            }
+        }
+        DecreaseMoney(upgrade[index].initialCost);
+        upgrade[index].initialCost += upgrade[index].increaseCost;
+        upgrade[index].text.text = upgrade[index].initialCost.ToString();
         upgrade[index].index++;
-        if (upgrade[index].index == 5&&upgrade[index].lvl<5)
+        if (upgrade[index].index == 5)
         {
             upgrade[index].value += upgrade[index].increaseLvlValue;
             upgrade[index].lvl++;
             upgrade[index].index = 0;
-            upgrade[index].sprite.fillAmount = 1;
-            // if (index==0)
-            // {
-                
-            // }
+            upgrade[index].sprite.DOFillAmount(1, 0.25f).SetEase(Ease.InSine);
+            if (upgrade[index].lvl == 5)
+            {
+                upgrade[index].text.text = "MAXED";
+            }
+            if (index == 2)
+            {
+                if (upgrade[index].lvl >= 4)
+                {
+                    upgrade[index].text.text = "MAXED";
+                }
+            }
         }
         else
         {
-            var currentUpgrade = upgrade[index];
-            currentUpgrade.value += currentUpgrade.increaseValue;
-
-            var remappedValue = PlayerMovement.Remap(currentUpgrade.index, 0, 5, 0, 1);
-            currentUpgrade.sprite.fillAmount = remappedValue;
-            Debug.Log(remappedValue);
-
-            // currentUpgrade.sprite.DOFill(remappedValue, 0.5f);
+            // var currentUpgrade = upgrade[index];
+            upgrade[index].value += upgrade[index].increaseValue;
+            // currentUpgrade.value += currentUpgrade.increaseValue;
+            var remappedValue=0f;
+            if (index == 2)
+            {
+                remappedValue = PlayerMovement.Remap(upgrade[index].index, 0, 4, 0, 1);
+            }
+            else
+            {
+                remappedValue = PlayerMovement.Remap(upgrade[index].index, 0, 5, 0, 1);
+            }
+            upgrade[index].sprite.DOFillAmount(remappedValue, 0.25f).SetEase(Ease.InSine);
         }
         switch (index)
         {
@@ -75,7 +147,6 @@ public class Upgrades : MonoBehaviour
                 break;
         }
         ShowUpgrade();
-        // attractor.SetPower(upgrade[index].lvl);
     }
 
     private void ShowUpgrade()
