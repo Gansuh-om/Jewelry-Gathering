@@ -19,11 +19,15 @@ public class Attractor : MonoBehaviour
     private GameObject _upgradeUI;
     public int maxCount=5;
     public int power;
+    public float pullDistance=0.5f;
+    private float _initialDistance;
+    [SerializeField] private GameObject arrow;
 
     private void Awake()
     {
         _collidersBuffer = new Collider[20];
         _rb = GetComponent<Rigidbody>();
+        _initialDistance = pullDistance;
     }
 
     public void SetPower(int value)
@@ -34,6 +38,11 @@ public class Attractor : MonoBehaviour
     private void FixedUpdate()
     {
         int numColliders = Physics.OverlapSphereNonAlloc(transform.position, attractionRadius, _collidersBuffer);
+        if (maxCount == _counter)
+        {
+            Full.Instance.Show();
+            arrow.SetActive(true);
+        }
         for (int i = 0; i < numColliders; i++)
         {
             Collider col = _collidersBuffer[i];
@@ -72,7 +81,7 @@ public class Attractor : MonoBehaviour
                 Vector3 attractionDirection = transform.position - _collecting[i].position;
                 float distance = attractionDirection.magnitude;
 
-                if (distance > 0.5f) 
+                if (distance > pullDistance) 
                 {
                     attractionDirection /= distance;
                     float force = attractionForce / distance;
@@ -80,6 +89,7 @@ public class Attractor : MonoBehaviour
                 }
                 else
                 {
+                    pullDistance += 0.05f;
                     _collecting[i].transform.parent = transform;
                     _collecting[i].tag = "Collected";
                     _collected.Add(_collecting[i]);
@@ -117,8 +127,11 @@ public class Attractor : MonoBehaviour
     private int _counterInside;
     public void ReleaseCollected()
     {
+        Full.Instance.Hide();
+        arrow.SetActive(false);
         _counter = 0;
         _counterInside = 0;
+        pullDistance = _initialDistance;
         // for (int i = 0; i < _collected.Count; i++)
         // {
         //     _collected[i].DOMove(_offloadSpot.position, 0.25f).SetDelay(i * 0.025f).OnComplete(()=>{
