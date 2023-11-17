@@ -89,7 +89,7 @@ public class Attractor : MonoBehaviour
                 }
                 else
                 {
-                    pullDistance += 0.05f;
+                    pullDistance += 0.01f;
                     _collecting[i].transform.parent = transform;
                     _collecting[i].tag = "Collected";
                     _collected.Add(_collecting[i]);

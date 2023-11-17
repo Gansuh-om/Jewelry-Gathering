@@ -11,6 +11,7 @@ struct CarsParts
     public Attractor attractor;
     public PlayerScript playerScript;
     public GameObject car;
+    public ParticleSystem particle;
 }
 public class CarMain : MonoBehaviour
 {
@@ -53,10 +54,14 @@ public class CarMain : MonoBehaviour
         carPartsArray[_id].attractor.ChangeRadius(_radius);
         carPartsArray[_id].attractor.ChangeCount(_count);
         carPartsArray[_id].playerScript.SetTarget(target);
+        carPartsArray[_id].playerScript.LevelUp();
         carPartsArray[_id].attractor.StartSet(offloadSpot,upgradeUI);
         if(_id!=0){
             carPartsArray[_id].car.transform.GetChild(0).transform.position = carPartsArray[_id - 1].car.transform.GetChild(0).transform.position;
             carPartsArray[_id].car.transform.GetChild(0).transform.rotation = carPartsArray[_id - 1].car.transform.GetChild(0).transform.rotation;
+            carPartsArray[_id].car.transform.GetChild(1).transform.position = carPartsArray[_id - 1].car.transform.GetChild(1).transform.position;
+            carPartsArray[_id].car.transform.GetChild(1).transform.rotation = carPartsArray[_id - 1].car.transform.GetChild(1).transform.rotation;
+            carPartsArray[_id].particle.Play();
         }
     }
 

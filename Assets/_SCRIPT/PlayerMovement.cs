@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Transform target;
+    [SerializeField] private List<Animator> animations;
     private Transform _player;
 
     private bool _hold;
@@ -15,11 +16,19 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             _hold = true;
+            foreach (var value in animations)
+            {
+                value.speed = 1;
+            }
         }
 
         if (Input.GetMouseButtonUp(0))
         {
             _hold = false;
+            foreach (var value in animations)
+            {
+                value.speed = 0;
+            }
         }
 
         if (_hold)
