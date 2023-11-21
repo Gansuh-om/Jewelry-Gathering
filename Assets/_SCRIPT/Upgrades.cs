@@ -6,6 +6,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [Serializable]
 public struct Upgrade
@@ -35,33 +36,67 @@ public class Upgrades : MonoBehaviour
     [SerializeField] private List<Transform> playerParts;
     
     [SerializeField] private TextMeshProUGUI moneyUi;
-    
+    [SerializeField] private List<Transform> totalObjects;
+    [SerializeField] private GameObject nextUI;
+
     public int money;
+    public int totalCount;
+
+    public int powerLevel;
     
     private void Awake()
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
         Instance = this;
-        ShowUpgrade();
-        moneyUi.text = money.ToString();
+        totalCount = totalObjects.Count;
         for (int i = 0; i < upgrade.Length; i++)
         {
             upgrade[i].text.text = upgrade[i].increaseCost.ToString();
         }
+        Initializer();
+        if (PlayerPrefs.HasKey("Money"))
+        {
+            money = PlayerPrefs.GetInt("Money");
+        }
+        moneyUi.text = money.ToString();
     }
 
+    public void GrayScale()
+    {
+        foreach (var value in totalObjects)
+        {
+            if (powerLevel < value.GetComponent<JewelStatus>().GetId())
+            {
+                value.GetComponent<JewelStatus>().SetColor();   
+            }
+            else
+            {
+                value.GetComponent<JewelStatus>().SetColor(true);   
+            }
+        }
+    }
     public async void IncreaseMoney(int value)
     {
         money += value;
         moneyUi.color = Color.green;
-        for (int i = value; i > 0; i--)
+        for (int i = value; i >= 0; i--)
         {
             // money++;
             moneyUi.text = (money - i).ToString();
             await Task.Delay(50);
         }
         moneyUi.color = Color.white;
+        PlayerPrefs.SetInt("Money",money);
+    }
+
+    public void DecreaseCount(int value)
+    {
+        totalCount -= value;
+        if (totalCount <= 10)
+        {
+            nextUI.SetActive(true);
+        }
     }
     public async void DecreaseMoney(int value)
     {
@@ -139,14 +174,28 @@ public class Upgrades : MonoBehaviour
         {
             case 0:
                 carMain.ChangeRadius(upgrade[index].value);
+                PlayerPrefs.SetInt($"CarRadiusLevel",upgrade[index].lvl);
+                PlayerPrefs.SetInt($"CarRadiusIndex",upgrade[index].index);
+                PlayerPrefs.SetFloat($"CarRadiusValue",upgrade[index].value);
+                PlayerPrefs.SetInt($"CarRadiusCost",upgrade[index].initialCost);
                 break;
             case 1:
                 carMain.ChangeCount((int)upgrade[index].value);
+                PlayerPrefs.SetInt($"CarCountLevel",upgrade[index].lvl);
+                PlayerPrefs.SetInt($"CarCountIndex",upgrade[index].index);
+                PlayerPrefs.SetFloat($"CarCountValue",upgrade[index].value);
+                PlayerPrefs.SetInt($"CarCountCost",upgrade[index].initialCost);
                 break;
             default:
                 upgrade[index].lvl++;
+                PlayerPrefs.SetInt($"CarPowerLevel",upgrade[index].lvl);
+                PlayerPrefs.SetInt($"CarPowerIndex",upgrade[index].index);
+                PlayerPrefs.SetFloat($"CarPowerValue",upgrade[index].value);
+                PlayerPrefs.SetInt($"CarPowerCost",upgrade[index].initialCost);
                 PlayerLevelUp();
-                carMain.SetInt(upgrade[index].lvl); 
+                carMain.SetInt(upgrade[index].lvl);
+                powerLevel = upgrade[index].lvl;
+                GrayScale();
                 break;
         }
         if (upgrade[index].lvl == 5)
@@ -160,14 +209,95 @@ public class Upgrades : MonoBehaviour
                 upgrade[index].text.text = "MAXED";
             }
         }
-        ShowUpgrade();
     }
 
-    private void ShowUpgrade()
+    private void Initializer()
     {
-        radiusUpgrade.text = $"Level - {upgrade[0].lvl}\nIndex - {upgrade[0].index}\nValue - {upgrade[0].value}";
-        capacityUpgrade.text = $"Level - {upgrade[1].lvl}\nIndex - {upgrade[1].index}\nValue - {upgrade[1].value}";
+        if (PlayerPrefs.HasKey("CarRadiusLevel"))
+        {
+            upgrade[0].lvl = PlayerPrefs.GetInt("CarRadiusLevel");
+        }
+        if (PlayerPrefs.HasKey("CarRadiusIndex"))
+        {
+            upgrade[0].index = PlayerPrefs.GetInt("CarRadiusIndex");
+        }
+        if (PlayerPrefs.HasKey("CarRadiusValue"))
+        {
+            upgrade[0].value = PlayerPrefs.GetFloat("CarRadiusValue");
+        }
+        if (PlayerPrefs.HasKey("CarRadiusCost"))
+        {
+            upgrade[0].initialCost = PlayerPrefs.GetInt("CarRadiusCost");
+        }
+        //////
         
+        if (PlayerPrefs.HasKey("CarCountLevel"))
+        {
+            upgrade[1].lvl = PlayerPrefs.GetInt("CarCountLevel");
+        }
+        if (PlayerPrefs.HasKey("CarCountIndex"))
+        {
+            upgrade[1].index = PlayerPrefs.GetInt("CarCountIndex");
+        }
+        if (PlayerPrefs.HasKey("CarCountValue"))
+        {
+            upgrade[1].value = PlayerPrefs.GetFloat("CarCountValue");
+        }
+        if (PlayerPrefs.HasKey("CarCountCost"))
+        {
+            upgrade[1].initialCost = PlayerPrefs.GetInt("CarCountCost");
+        }
+        
+        ////////
+        
+        if (PlayerPrefs.HasKey("CarPowerLevel"))
+        {
+            upgrade[2].lvl = PlayerPrefs.GetInt("CarPowerLevel");
+        }
+        if (PlayerPrefs.HasKey("CarPowerIndex"))
+        {
+            upgrade[2].index = PlayerPrefs.GetInt("CarPowerIndex");
+        }
+        if (PlayerPrefs.HasKey("CarPowerValue"))
+        {
+            upgrade[2].value = PlayerPrefs.GetFloat("CarPowerValue");
+        }
+        if (PlayerPrefs.HasKey("CarPowerCost"))
+        {
+            upgrade[2].initialCost = PlayerPrefs.GetInt("CarPowerCost");
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            upgrade[i].text.text = upgrade[i].initialCost.ToString();
+            var remappedValue=0f;
+            if (i == 2)
+            {
+                remappedValue = PlayerMovement.Remap(upgrade[i].index, 0, 4, 0, 1);
+            }
+            else
+            {
+                remappedValue = PlayerMovement.Remap(upgrade[i].index, 0, 5, 0, 1);
+            }
+            upgrade[i].sprite.DOFillAmount(remappedValue, 0.25f).SetEase(Ease.InSine);
+            
+            if (upgrade[i].lvl == 5)
+            {
+                upgrade[i].text.text = "MAXED";
+            }
+            if (i == 2)
+            {
+                if (upgrade[i].lvl >= 4)
+                {
+                    upgrade[i].text.text = "MAXED";
+                }
+            }
+        }
+        carMain.ChangeRadius(upgrade[0].value);
+        carMain.ChangeCount((int)upgrade[1].value);
+        carMain.SetInt(upgrade[2].lvl); 
+        powerLevel = upgrade[2].lvl;
+        GrayScale();
     }
 
     private void PlayerLevelUp()
@@ -177,5 +307,10 @@ public class Upgrades : MonoBehaviour
             DOTween.Rewind(player);
             player.DOScale(1, 0.25f).SetEase(Ease.OutElastic).From(0.5f);
         }
+    }
+
+    public void Next()
+    {
+        SceneManager.LoadScene("Scenes/SampleScene");
     }
 }

@@ -23,6 +23,7 @@ public class Offloading : MonoBehaviour
         return spot;
     }
     public void DispenseMoney(int count){
+        Upgrades.Instance.DecreaseCount(count);
         for(int i=0;i<count;i++){
             if(_tempId>=20){
                 _tempId=0;

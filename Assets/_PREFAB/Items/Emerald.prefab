@@ -114,6 +114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 4
+  meshRenderer: {fileID: 2446019717324937030}
+  material: {fileID: 2100000, guid: e9ed8cb5d085f49039a32a38077c3aeb, type: 2}
 --- !u!208 &5315459534081956192
 NavMeshObstacle:
   m_ObjectHideFlags: 0
