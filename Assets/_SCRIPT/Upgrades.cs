@@ -62,17 +62,24 @@ public class Upgrades : MonoBehaviour
         moneyUi.text = money.ToString();
     }
 
+    private void Start()
+    {
+        GrayScale();
+    }
+
     public void GrayScale()
     {
         foreach (var value in totalObjects)
         {
             if (powerLevel < value.GetComponent<JewelStatus>().GetId())
             {
+                // Debug.Log($"{powerLevel} -{value.GetComponent<JewelStatus>().GetId()}"); 
                 value.GetComponent<JewelStatus>().SetColor();   
             }
             else
             {
                 value.GetComponent<JewelStatus>().SetColor(true);   
+                Debug.Log($"{powerLevel} -{value.GetComponent<JewelStatus>().GetId()}"); 
             }
         }
     }

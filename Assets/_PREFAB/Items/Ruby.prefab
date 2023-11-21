@@ -149,7 +149,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c76f7e0965e544f849c567c71d01cbe1, type: 2}
+  - {fileID: 2100000, guid: 7bc2af29cd09a4c8480820d8f1440996, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -198,8 +198,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 3
+  initialMat: {fileID: 2100000, guid: 7bc2af29cd09a4c8480820d8f1440996, type: 2}
   meshRenderer: {fileID: 3602279626635684149}
-  material: {fileID: 2100000, guid: e9ed8cb5d085f49039a32a38077c3aeb, type: 2}
+  materialz: {fileID: 2100000, guid: e9ed8cb5d085f49039a32a38077c3aeb, type: 2}
 --- !u!208 &4517182309819615445
 NavMeshObstacle:
   m_ObjectHideFlags: 0

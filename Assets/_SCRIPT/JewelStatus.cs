@@ -6,15 +6,9 @@ using UnityEngine;
 public class JewelStatus : MonoBehaviour
 {
     public int id;
-    private Material _initialColor;
+    public Material initialMat;
     public MeshRenderer meshRenderer;
-    public Material material;
-
-    private void Awake()
-    {
-        _initialColor = meshRenderer.material;
-    }
-
+    public Material materialz;
     public int GetId()
     {
         return id;
@@ -22,13 +16,14 @@ public class JewelStatus : MonoBehaviour
 
     public void SetColor(bool value=false)
     {
+        Debug.Log(value);
         if (value)
         {
-            meshRenderer.material = _initialColor;
+            meshRenderer.material = initialMat;
         }
         else
         {
-            meshRenderer.material = material;
+            meshRenderer.material = materialz;
         }
     }
 }
