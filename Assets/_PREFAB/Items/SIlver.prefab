@@ -185,6 +185,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
+  initialMat: {fileID: 2100000, guid: 58fdaa81aeca34cba875d19199dffabe, type: 2}
+  meshRenderer: {fileID: 518514792448203511}
+  materialz: {fileID: 2100000, guid: e9ed8cb5d085f49039a32a38077c3aeb, type: 2}
 --- !u!64 &4037713615352649690
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -284,6 +287,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe95b6fc7e63d465d8ba2f8c1112cbb7, type: 3}
+--- !u!23 &518514792448203511 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: fe95b6fc7e63d465d8ba2f8c1112cbb7, type: 3}
+  m_PrefabInstance: {fileID: 1221522049605535347}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1691399251696214424 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fe95b6fc7e63d465d8ba2f8c1112cbb7, type: 3}

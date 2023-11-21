@@ -23,6 +23,10 @@ public class Attractor : MonoBehaviour
     public float pullDistance=0.5f;
     private float _initialDistance;
     [SerializeField] private GameObject arrow;
+    public bool lvl5;
+    public bool isFull;
+    public bool main;
+    public List<Attractor> attractors;
 
     private void Awake()
     {
@@ -41,8 +45,28 @@ public class Attractor : MonoBehaviour
         int numColliders = Physics.OverlapSphereNonAlloc(transform.position, attractionRadius, _collidersBuffer);
         if (maxCount == _counter)
         {
-            Full.Instance.Show();
-            arrow.SetActive(true);
+            if (lvl5)
+            {
+                var tempInt = 0;
+                isFull = true;
+                foreach (var value in attractors)
+                {
+                    if (value.isFull)
+                    {
+                        tempInt++;
+                    }
+                }
+                if (tempInt == 3&&main)
+                {
+                    Full.Instance.Show();
+                    arrow.SetActive(true);
+                }
+            }
+            else
+            {
+                Full.Instance.Show();
+                arrow.SetActive(true);
+            }
         }
         for (int i = 0; i < numColliders; i++)
         {
@@ -106,6 +130,7 @@ public class Attractor : MonoBehaviour
     {
         if (other.CompareTag("OffloadSpot"))
         {
+            isFull = false;
             if(_collected.Count<=0)
                 return;
             ReleaseCollected();
