@@ -36,6 +36,9 @@ public class Upgrades : MonoBehaviour
     
     [SerializeField] private TextMeshProUGUI moneyUi;
     
+    [SerializeField] private TextMeshProUGUI debugText;
+    [SerializeField] private Transform debugButton;
+    
     public int money;
     
     private void Awake()
@@ -74,6 +77,34 @@ public class Upgrades : MonoBehaviour
             await Task.Delay(1);
         }
         moneyUi.color = Color.white;
+    }
+
+    private int _counter;
+    public void CreativeUpgrade()
+    {
+        _counter++;
+        DOTween.Rewind(debugButton);
+        debugButton.DOScale(1 + (0.1f * _counter), 0.25f).SetEase(Ease.OutElastic);
+        switch (_counter)
+        {
+            case 1:
+                debugText.text = "LEVEL 5";
+                break;
+            case 2:
+                debugText.text = "LEVEL 10";
+                break;
+            case 3:
+                debugText.text = "LEVEL 50";
+                break;
+            case 4:
+                debugText.text = "LEVEL 100";
+                break;
+            default:
+                _counter = 4;
+                break;
+        }
+        carMain.SetInt(_counter); 
+        carMain.ChangeCount(1000);
     }
     public void Upgrade(int index)
     {

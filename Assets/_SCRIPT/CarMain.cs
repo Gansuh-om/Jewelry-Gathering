@@ -75,6 +75,15 @@ public class CarMain : MonoBehaviour
         }
     }
 
+    public void Power(int value)
+    {
+        carPartsArray[_id].attractor.SetPower(value);
+    }
+
+    public void Speed(float value)
+    {
+        carPartsArray[_id].playerScript.ChangeSpeed(value);
+    }
     public void SetInt(int value)
     {
         if (_id.Equals(value)) return;

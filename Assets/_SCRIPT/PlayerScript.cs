@@ -18,6 +18,10 @@ public class PlayerScript : MonoBehaviour
         _target = value;
     }
 
+    public void ChangeSpeed(float value)
+    {
+        player.speed = value;
+    }
     public void LevelUp()
     {
         foreach (var value in parts)
