@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Cinemachine;
 using DG.Tweening;
 using TMPro;
 using UnityEngine.UI;
@@ -38,6 +39,7 @@ public class Upgrades : MonoBehaviour
     
     [SerializeField] private TextMeshProUGUI debugText;
     [SerializeField] private Transform debugButton;
+    [SerializeField] private CinemachineVirtualCamera virtCam;
     
     public int money;
     
@@ -103,6 +105,15 @@ public class Upgrades : MonoBehaviour
                 _counter = 4;
                 break;
         }
+
+        // CinemachineFramingTransposer transposer = virtCam.GetComponent<CinemachineFramingTransposer>();
+        // transposer.m_CameraDistance += 5;
+        CinemachineComponentBase componentBase = virtCam.GetCinemachineComponent(CinemachineCore.Stage.Body);
+        if (componentBase is CinemachineFramingTransposer)
+        {
+            (componentBase as CinemachineFramingTransposer).m_CameraDistance +=2; // your value
+        }
+        // virtCam.
         carMain.SetInt(_counter); 
         carMain.ChangeCount(1000);
     }

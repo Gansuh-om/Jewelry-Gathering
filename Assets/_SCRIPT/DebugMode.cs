@@ -21,6 +21,10 @@ public class DebugMode : MonoBehaviour
     [SerializeField] private CarMain car;
     [SerializeField] private GameObject cliff;
     [SerializeField] private GameObject playerCam;
+    
+    [SerializeField] private GameObject one;
+    [SerializeField] private GameObject two;
+    [SerializeField] private GameObject three;
 
     private bool _on;
     public void turnOnOff()
@@ -59,6 +63,27 @@ public class DebugMode : MonoBehaviour
     public void JewelCount()
     {
         Debug.Log($"JewelCount-debug {jewelCount.text}");
+        if (int.TryParse(jewelCount.text, out int result))
+        {
+            switch (result)
+            {
+                case 1:
+                    one.SetActive(true);
+                    two.SetActive(false);
+                    three.SetActive(false);
+                    break;
+                case 2:
+                    one.SetActive(false);
+                    two.SetActive(true);
+                    three.SetActive(false);
+                    break;
+                default:
+                    one.SetActive(false);
+                    two.SetActive(false);
+                    three.SetActive(true);
+                    break;
+            }
+        }
     }
     public void Wall()
     {
