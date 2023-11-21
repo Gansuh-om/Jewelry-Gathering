@@ -17,6 +17,7 @@ public class Attractor : MonoBehaviour
     private List<Transform> _collecting = new List<Transform>();
     private Transform _offloadSpot;
     private GameObject _upgradeUI;
+    private GameObject _upgradeCamera;
     public int maxCount=5;
     public int power;
     public float pullDistance=0.5f;
@@ -113,6 +114,7 @@ public class Attractor : MonoBehaviour
         if (other.CompareTag("Upgrade"))
         {
             _upgradeUI.SetActive(true);
+            _upgradeCamera.SetActive(true);
         }
     }
 
@@ -121,6 +123,7 @@ public class Attractor : MonoBehaviour
         if (other.CompareTag("Upgrade"))
         {
             _upgradeUI.SetActive(false);
+            _upgradeCamera.SetActive(false);
         }
     }
     private int _tempInd;
@@ -190,9 +193,10 @@ public class Attractor : MonoBehaviour
         attractionRadius = value;
     }
 
-    public void StartSet(Transform offload, GameObject upgradeUi)
+    public void StartSet(Transform offload, GameObject upgradeUi, GameObject upgradeCamera)
     {
         _offloadSpot = offload;
         _upgradeUI = upgradeUi;
+        _upgradeCamera = upgradeCamera;
     }
 }

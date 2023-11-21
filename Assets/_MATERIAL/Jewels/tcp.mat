@@ -7,9 +7,19 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Emerald_1
-  m_Shader: {fileID: 4800000, guid: 849dc4ff793a3f943ad21a3b6ee26456, type: 3}
+  m_Name: tcp
+  m_Shader: {fileID: -6465566751694194690, guid: edd7abf643fa4bc4e8561d4c280c97cf, type: 3}
   m_ValidKeywords:
+  - TCP2_MATCAP
+  - TCP2_REFLECTIONS
+  - TCP2_REFLECTIONS_FRESNEL
+  - TCP2_RIM_LIGHTING
+  - TCP2_RIM_LIGHTING_LIGHTMASK
+  - TCP2_SHADOW_LIGHT_COLOR
+  - _EMISSION
+  m_InvalidKeywords:
+  - CLIP_SPACE
+  - TCP2_UV_NORMALS_FULL
   - _ADDITIONAL_LIGHTS_ENABLED
   - _ANISO_SPECULAR
   - _ENVIRONMENT_LIGHTING_ENABLED
@@ -18,8 +28,6 @@ Material:
   - _RAMP_TRIPLE
   - _REFLECTIONS
   - _SPECULAR
-  m_InvalidKeywords:
-  - CLIP_SPACE
   - _ZWRITE_ON
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
@@ -58,6 +66,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MatCapMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MatCapTex:
+        m_Texture: {fileID: 2800000, guid: 904a7bba824ee0c418826440aa824947, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -70,7 +86,19 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Ramp:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _RampMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ReflectionTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowBaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -108,54 +136,112 @@ Material:
     - _DepthOffsetUnits: 0
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _DirectIntensityOutline: 1
     - _DstBlend: 0
     - _Emission: 0
+    - _EmissionChannel: 4
     - _EnvironmentLightingEnabled: 1
     - _EnvironmentReflections: 1
     - _Fog: 1
     - _Fresnel: 1
-    - _FresnelSmoothness: 0.665
-    - _FresnelThickness: 0.553
+    - _FresnelMax: 1.5
+    - _FresnelMin: 0
+    - _FresnelSmoothness: 0.577
+    - _FresnelThickness: 0.626
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _IndirectIntensity: 1
+    - _IndirectIntensityOutline: 0
+    - _MatCapMaskChannel: 0
+    - _MatCapType: 0
     - _Metallic: 1
+    - _NormalsSource: 0
+    - _NormalsUVType: 0
+    - _OcclusionChannel: 0
     - _OcclusionStrength: 1
+    - _OutlineLightingType: 0
+    - _OutlineLightingTypeURP: 0
+    - _OutlineMaxWidth: 1
+    - _OutlineMinWidth: 1
+    - _OutlinePixelSizeType: 0
+    - _OutlineTextureLOD: 5
+    - _OutlineTextureType: 0
+    - _OutlineWidth: 1
     - _Parallax: 0.005
     - _PureShadowColor: 0
     - _QueueOffset: 0
-    - _Ramp0: -1
-    - _Ramp1: -1
+    - _Ramp0: 0.15
+    - _Ramp1: 0.8
+    - _RampBands: 4
+    - _RampBandsSmoothing: 0.1
+    - _RampOffset: 0
+    - _RampScale: 1
+    - _RampSmoothing: 0.4
     - _RampSmoothness: 0
+    - _RampThreshold: 1
     - _RampTriple: 1
+    - _RampType: 0
     - _ReceiveShadows: 1
-    - _ReflectionBlend: 1
+    - _ReceiveShadowsOff: 1
+    - _ReflectionBlend: 0
+    - _ReflectionMapType: 0
     - _ReflectionProbes: 0
     - _ReflectionSmoothness: 1
     - _Reflections: 1
+    - _RenderingMode: 0
+    - _RimMax: 1.09
+    - _RimMin: 2
     - _Scale: 0.05
+    - _ShadowColorLightAtten: 1
     - _ShadowMask: 0
+    - _SingleIndirectColor: 0
     - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _Specular: 1
-    - _SpecularExponent: 527
+    - _SpecularExponent: 506
     - _SpecularHighlights: 1
-    - _SpecularSmoothness: 0
+    - _SpecularMapType: 0
+    - _SpecularRoughness: 0.385
+    - _SpecularSmoothness: 1
     - _SpecularThreshold: 1
+    - _SpecularToonSize: 0.25
+    - _SpecularToonSmoothness: 0.05
+    - _SpecularType: 0
     - _SrcBlend: 1
     - _Surface: 0
+    - _UseAlphaTest: 0
+    - _UseEmission: 1
+    - _UseFresnelReflections: 1
+    - _UseMatCap: 1
+    - _UseMatCapMask: 0
+    - _UseMobileMode: 0
+    - _UseNormalMap: 0
+    - _UseOcclusion: 0
+    - _UseOutline: 0
     - _UseRampMap: 0
+    - _UseReflections: 1
+    - _UseRim: 1
+    - _UseRimLightMask: 1
+    - _UseShadowTexture: 0
+    - _UseSpecular: 0
     - _VertexColor: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0, g: 1, b: 0.18552995, a: 1}
+    - _BaseColor: {r: 1, g: 0, b: 0, a: 1}
     - _Color: {r: 0, g: 0.24022317, b: 1, a: 1}
-    - _EmissionColor: {r: 0.0051745414, g: 0.3001234, b: 0.025872706, a: 1}
-    - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
-    - _ShadowTint: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 17.568628, g: 0, b: 0, a: 1}
+    - _FresnelColor: {r: 0.5, g: 0, b: 0.054902077, a: 1}
+    - _HColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MatCapColor: {r: 1, g: 0.495283, b: 0.495283, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.5}
+    - _SColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ShadowTint: {r: 0.33962262, g: 0, b: 0.08225235, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _SpecularColor: {r: 0, g: 1, b: 0.105882406, a: 1}
+    - _SpecularColor: {r: 1, g: 0, b: 0.047120094, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &5089127416558209838
 MonoBehaviour:

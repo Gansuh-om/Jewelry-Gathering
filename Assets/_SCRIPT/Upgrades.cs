@@ -37,8 +37,11 @@ public class Upgrades : MonoBehaviour
     [SerializeField] private TextMeshProUGUI moneyUi;
     
     public int money;
+    
     private void Awake()
     {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
         Instance = this;
         ShowUpgrade();
         moneyUi.text = money.ToString();

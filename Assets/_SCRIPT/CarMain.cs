@@ -16,10 +16,10 @@ struct CarsParts
 public class CarMain : MonoBehaviour
 {
     public static CarMain Instance;
-    
     [SerializeField] private CarsParts[] carPartsArray = new CarsParts[5];
     [SerializeField] private Transform offloadSpot;
     [SerializeField] private GameObject upgradeUI;
+    [SerializeField] private GameObject upgradeCamera;
     [SerializeField] private Transform target;
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
@@ -55,13 +55,23 @@ public class CarMain : MonoBehaviour
         carPartsArray[_id].attractor.ChangeCount(_count);
         carPartsArray[_id].playerScript.SetTarget(target);
         carPartsArray[_id].playerScript.LevelUp();
-        carPartsArray[_id].attractor.StartSet(offloadSpot,upgradeUI);
+        carPartsArray[_id].attractor.StartSet(offloadSpot,upgradeUI,upgradeCamera);
         if(_id!=0){
             carPartsArray[_id].car.transform.GetChild(0).transform.position = carPartsArray[_id - 1].car.transform.GetChild(0).transform.position;
             carPartsArray[_id].car.transform.GetChild(0).transform.rotation = carPartsArray[_id - 1].car.transform.GetChild(0).transform.rotation;
             carPartsArray[_id].car.transform.GetChild(1).transform.position = carPartsArray[_id - 1].car.transform.GetChild(1).transform.position;
             carPartsArray[_id].car.transform.GetChild(1).transform.rotation = carPartsArray[_id - 1].car.transform.GetChild(1).transform.rotation;
             carPartsArray[_id].particle.Play();
+            if (_id == 4)
+            {
+                Debug.Log($"{carPartsArray[_id].attractor.transform.parent.parent.GetChild(1).name} - {carPartsArray[_id].attractor.transform.parent.parent.GetChild(1).GetChild(0).name}");
+                carPartsArray[_id].attractor.transform.parent.parent.GetChild(1).GetChild(0).GetComponent<Attractor>().ChangeRadius(_radius);
+                carPartsArray[_id].attractor.transform.parent.parent.GetChild(1).GetChild(0).GetComponent<Attractor>().ChangeCount(_count);
+                carPartsArray[_id].attractor.transform.parent.parent.GetChild(1).GetChild(0).GetComponent<Attractor>().StartSet(offloadSpot,upgradeUI,upgradeCamera);
+                carPartsArray[_id].attractor.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Attractor>().ChangeRadius(_radius);
+                carPartsArray[_id].attractor.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Attractor>().ChangeCount(_count);
+                carPartsArray[_id].attractor.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Attractor>().StartSet(offloadSpot,upgradeUI,upgradeCamera);
+            }
         }
     }
 
