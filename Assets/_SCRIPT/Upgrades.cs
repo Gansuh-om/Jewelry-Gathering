@@ -149,6 +149,17 @@ public class Upgrades : MonoBehaviour
                 carMain.SetInt(upgrade[index].lvl); 
                 break;
         }
+        if (upgrade[index].lvl == 5)
+        {
+            upgrade[index].text.text = "MAXED";
+        }
+        if (index == 2)
+        {
+            if (upgrade[index].lvl >= 4)
+            {
+                upgrade[index].text.text = "MAXED";
+            }
+        }
         ShowUpgrade();
     }
 
@@ -156,6 +167,7 @@ public class Upgrades : MonoBehaviour
     {
         radiusUpgrade.text = $"Level - {upgrade[0].lvl}\nIndex - {upgrade[0].index}\nValue - {upgrade[0].value}";
         capacityUpgrade.text = $"Level - {upgrade[1].lvl}\nIndex - {upgrade[1].index}\nValue - {upgrade[1].value}";
+        
     }
 
     private void PlayerLevelUp()
