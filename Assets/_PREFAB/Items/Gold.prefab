@@ -198,9 +198,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 2
-  initialMat: {fileID: 2100000, guid: 58fdaa81aeca34cba875d19199dffabe, type: 2}
-  meshRenderer: {fileID: 5212379115244487925}
-  materialz: {fileID: 2100000, guid: e9ed8cb5d085f49039a32a38077c3aeb, type: 2}
 --- !u!208 &8334173599368577411
 NavMeshObstacle:
   m_ObjectHideFlags: 0
