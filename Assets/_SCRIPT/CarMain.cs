@@ -24,6 +24,7 @@ public class CarMain : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private Offloading offloading;
+    [SerializeField] private DebugMode debugMode;
 
     [SerializeField] private GameObject text;
 
@@ -73,6 +74,7 @@ public class CarMain : MonoBehaviour
                 carPartsArray[_id].attractor.transform.parent.parent.GetChild(2).GetChild(0).GetComponent<Attractor>().StartSet(offloadSpot,upgradeUI,upgradeCamera);
             }
         }
+        debugMode.Speed();
     }
 
     public void Power(int value)

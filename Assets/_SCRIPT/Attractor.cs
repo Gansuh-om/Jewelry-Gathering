@@ -114,7 +114,10 @@ public class Attractor : MonoBehaviour
         if (other.CompareTag("Upgrade"))
         {
             _upgradeUI.SetActive(true);
-            // _upgradeCamera.SetActive(true);
+            if (DebugMode.Instance.GetBool())
+            {
+                _upgradeCamera.SetActive(true);
+            }
         }
     }
 
@@ -123,7 +126,10 @@ public class Attractor : MonoBehaviour
         if (other.CompareTag("Upgrade"))
         {
             _upgradeUI.SetActive(false);
-            // _upgradeCamera.SetActive(false);
+            if (DebugMode.Instance.GetBool())
+            {
+                _upgradeCamera.SetActive(false);
+            }
         }
     }
     private int _tempInd;

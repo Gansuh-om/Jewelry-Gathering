@@ -11,6 +11,7 @@ public class PlayerScript : MonoBehaviour
     private void Update()
     {
         player.SetDestination(_target.position);
+        
     }
 
     public void SetTarget(Transform value)
@@ -21,6 +22,7 @@ public class PlayerScript : MonoBehaviour
     public void ChangeSpeed(float value)
     {
         player.speed = value;
+        Debug.Log($"happen? {value}");
     }
     public void LevelUp()
     {
