@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using DG.Tweening;
 using UnityEngine;
 
@@ -47,59 +48,70 @@ public class Attractor : MonoBehaviour
         for (int i = 0; i < numColliders; i++)
         {
             Collider col = _collidersBuffer[i];
-            if (col.CompareTag("Attractable"))
-            {
-                if (_counter < maxCount&&power>=col.GetComponent<JewelStatus>().GetId())
-                {
-                    _counter++;
-                    col.tag = "Collecting";
-                    _collecting.Add(col.transform);
-                }
-            }
-            // else if (col.CompareTag("Collecting"))
+            // if (col.CompareTag("Attractable"))
             // {
-            //     Vector3 attractionDirection = transform.position - col.transform.position;
-            //     float distance = attractionDirection.magnitude;
-            //
-            //     if (distance > 0.5f) // Avoid division by zero
+            //     if (_counter < maxCount&&power>=col.GetComponent<JewelStatus>().GetId())
             //     {
-            //         attractionDirection /= distance;
-            //         float force = attractionForce / distance;
-            //         col.transform.position += attractionDirection * force * Time.deltaTime;
-            //     }
-            //     else
-            //     {
-            //         col.tag = "Collected";
-            //         _collected.Add(col.transform);
+            //         _counter++;
+            //         col.tag = "Collecting";
+            //         _collecting.Add(col.transform);
             //     }
             // }
-        }
-
-        if (_collecting.Count > 0)
-        {
-            for (int i = 0; i < _collecting.Count; i++)
+            // else 
+            if (col.CompareTag("Attractable"))
             {
-                Vector3 attractionDirection = transform.position - _collecting[i].position;
-                float distance = attractionDirection.magnitude;
-
-                if (distance > pullDistance) 
+                if (_counter < maxCount && power >= col.GetComponent<JewelStatus>().GetId())
                 {
-                    attractionDirection /= distance;
-                    float force = attractionForce / distance;
-                    _collecting[i].position += attractionDirection * force * Time.deltaTime;
-                }
-                else
-                {
-                    pullDistance += 0.01f;
-                    _collecting[i].transform.parent = transform;
-                    _collecting[i].tag = "Collected";
-                    _collected.Add(_collecting[i]);
-                    _collecting[i].GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = false;
-                    _collecting.Remove(_collecting[i]);
-                    break;
+                    Vector3 attractionDirection = transform.position - col.transform.position;
+                    float distance = attractionDirection.magnitude;
+                
+                    if (distance > pullDistance) // Avoid division by zero
+                    {
+                        attractionDirection /= distance;
+                        float force = attractionForce / distance;
+                        col.transform.position += attractionDirection * force * Time.deltaTime;
+                    }
+                    else
+                    {
+                        col.tag = "Collected";
+                        _collected.Add(col.transform);
+                        pullDistance += 0.01f;
+                        col.transform.parent = transform;
+                        col.tag = "Collected";
+                        _collected.Add(col.transform);
+                        col.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = false;
+                        _collecting.Remove(col.transform);
+                        _counter++;
+                    }
                 }
             }
         }
+
+        // if (_collecting.Count > 0)
+        // {
+        //     for (int i = 0; i < _collecting.Count; i++)
+        //     {
+        //         Vector3 attractionDirection = transform.position - _collecting[i].position;
+        //         float distance = attractionDirection.magnitude;
+        //
+        //         if (distance > pullDistance) 
+        //         {
+        //             attractionDirection /= distance;
+        //             float force = attractionForce / distance;
+        //             _collecting[i].position += attractionDirection * force * Time.deltaTime;
+        //         }
+        //         else
+        //         {
+        // pullDistance += 0.01f;
+        // _collecting[i].transform.parent = transform;
+        // _collecting[i].tag = "Collected";
+        // _collected.Add(_collecting[i]);
+        // _collecting[i].GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = false;
+        // _collecting.Remove(_collecting[i]);
+        //             break;
+        //         }
+        //     }
+        // }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -113,6 +125,7 @@ public class Attractor : MonoBehaviour
 
         if (other.CompareTag("Upgrade"))
         {
+            DebugMode.Instance.SetCamDuration();
             _upgradeUI.SetActive(true);
             if (DebugMode.Instance.GetBool())
             {

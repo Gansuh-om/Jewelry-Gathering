@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,6 +28,9 @@ public class DebugMode : MonoBehaviour
     [SerializeField] private GameObject one;
     [SerializeField] private GameObject two;
     [SerializeField] private GameObject three;
+    
+    [SerializeField] private CinemachineBrain camBrain;
+    [SerializeField] private float upgradeCameraDuration;
     private int _power;
     private float _range;
     private int _wall;
@@ -101,6 +105,7 @@ public class DebugMode : MonoBehaviour
             speed.text = _speed.ToString();
             Speed();
         }
+        this.gameObject.SetActive(false);
     }
 
     public void turnOnOff()
@@ -203,5 +208,10 @@ public class DebugMode : MonoBehaviour
     public bool GetBool()
     {
         return upgradeCamera.isOn;
+    }
+
+    public void SetCamDuration()
+    {
+        camBrain.m_DefaultBlend.m_Time = upgradeCameraDuration;
     }
 }
