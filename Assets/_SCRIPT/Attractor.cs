@@ -168,23 +168,43 @@ public class Attractor : MonoBehaviour
         //         }
         //     });
         // }
+        
+        
+        // .SetDelay(i * 0.025f)
+        
+        
         int collectedCount = _collected.Count;
         for (int i = 0; i < collectedCount; i++)
         {
             Transform currentTransform = _collected[i];
             
-            currentTransform.DOMove(_offloadSpot.position, 0.25f)
-                .SetDelay(i * 0.025f)
-                .OnComplete(() =>
+            // currentTransform.DOMove(_offloadSpot.position, 0.5f).SetEase(Ease.OutSine)
+            // .OnComplete(() =>
+            // {
+            //     currentTransform.gameObject.SetActive(false);
+            //     _counterInside++;
+            //
+            //     if (_counterInside == collectedCount)
+            //     {
+            //         RemoveListItems();
+            //     }
+            // });
+            currentTransform.DOMoveZ(_offloadSpot.position.z, 0.5f).SetEase(Ease.OutSine);
+            currentTransform.DOMoveX(_offloadSpot.position.x, 0.5f).SetEase(Ease.OutSine);
+            currentTransform.DOMoveY(_offloadSpot.position.y+2, 0.25f).SetEase(Ease.Linear)
+            .OnComplete(() =>
+            {
+                currentTransform.DOScale(0, 0.25f).SetEase(Ease.Linear);
+                currentTransform.DOMoveY(_offloadSpot.position.y, 0.25f).SetEase(Ease.Linear).OnComplete(() =>
                 {
                     currentTransform.gameObject.SetActive(false);
                     _counterInside++;
-
                     if (_counterInside == collectedCount)
                     {
                         RemoveListItems();
                     }
                 });
+            });
         }
     }
 

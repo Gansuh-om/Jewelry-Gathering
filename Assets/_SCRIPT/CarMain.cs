@@ -86,6 +86,11 @@ public class CarMain : MonoBehaviour
     {
         carPartsArray[_id].playerScript.ChangeSpeed(value);
     }
+
+    public void SpeedSpecific(float value, int id)
+    {
+        carPartsArray[id].playerScript.ChangeSpeed(value);
+    }
     public void SetInt(int value)
     {
         if (_id.Equals(value)) return;

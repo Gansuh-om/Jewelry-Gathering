@@ -16,7 +16,7 @@ public class DebugMode : MonoBehaviour
     [SerializeField] private Toggle upgradeCamera;
     [SerializeField] private TMP_InputField capacity;
     [SerializeField] private TMP_InputField jewelCount;
-    [SerializeField] private TMP_InputField speed;
+    [SerializeField] private List<TMP_InputField> speed;
     
     [SerializeField] private TextMeshProUGUI powerText;
     [SerializeField] private TextMeshProUGUI rangeText;
@@ -99,11 +99,15 @@ public class DebugMode : MonoBehaviour
             jewelCount.text = _jewelCount.ToString();
             JewelCount();
         }
-        if (PlayerPrefs.HasKey("_speed"))
+
+        for (int i = 0; i < speed.Count; i++)
         {
-            _speed = PlayerPrefs.GetInt("_speed");
-            speed.text = _speed.ToString();
-            Speed();
+            if (PlayerPrefs.HasKey($"_speed{i}"))
+            {
+                _speed = PlayerPrefs.GetInt($"_speed{i}");
+                speed[i].text = _speed.ToString();
+                Speed();
+            }
         }
         this.gameObject.SetActive(false);
     }
@@ -133,15 +137,16 @@ public class DebugMode : MonoBehaviour
     }
     public void Speed()
     {
-        // Debug.Log($"Speed-debug {speed.value}");
-        // speedText.text = speed.value.ToString();
-        // car.Speed((int)speed.value);
-        Debug.Log($"Capacity-debug {speed.text}");
-        if (int.TryParse(speed.text, out int result))
+        for (int i = 0; i < speed.Count; i++)
         {
-            // car.ChangeCount(result);
-            car.Speed(result);
-            PlayerPrefs.SetInt("_speed",result);
+            Debug.Log($"Capacity-debug {speed[i].text}");
+            if (int.TryParse(speed[i].text, out int result))
+            {
+                // car.ChangeCount(result);
+                // car.Speed(result);
+                car.SpeedSpecific(result,i);
+                PlayerPrefs.SetInt($"_speed{i}",result);
+            }
         }
     }
     public void Range()

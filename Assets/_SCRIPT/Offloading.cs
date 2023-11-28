@@ -30,10 +30,15 @@ public class Offloading : MonoBehaviour
             var started = Instantiate(money,this.transform);
             started.transform.position = moneyFrom.position;
             started.transform.DOLocalRotate(new Vector3(0,90,0),0.1f);
+            var obj = Instantiate(text, this.transform.GetChild(0));
+            started.transform.GetChild(1).GetComponent<Money>().text = obj;
+            obj.SetActive(false);
             if(i!=0){
                 started.transform.DOMove(moneyTo.transform.position,0.5f).SetDelay(i*0.1f).OnComplete(()=>
                 {
-                    Instantiate(text, this.transform.GetChild(0));
+                    Debug.Log($"{started.transform.GetChild(1).name}");
+                    started.transform.GetChild(1).GetComponent<Money>().text.SetActive(true);
+                    // obj.transform.parent = started.transform;
                     started.transform.DOMove(moneyDropLocations[_tempId].position+_tempVec,0.1f).OnComplete(()=>{
                         started.GetComponent<Rigidbody>().isKinematic=false;
                         // started.transform.DOMove(started.transform.position-_tempVec,0.1f).OnComplete(()=>{
@@ -46,7 +51,7 @@ public class Offloading : MonoBehaviour
                 });
             }else{
                 started.transform.DOMove(moneyTo.transform.position,0.5f).SetDelay(i*0.1f).OnComplete(()=>{
-                    Instantiate(text, this.transform.GetChild(0));
+                    started.transform.GetChild(1).GetComponent<Money>().text.SetActive(true);
                     started.transform.DOMove(moneyDropLocations[_tempId].position+_tempVec,0.1f).OnComplete(()=>{
                         started.GetComponent<Rigidbody>().isKinematic=false;
                         // started.transform.DOMove(started.transform.position-_tempVec,0.1f).OnComplete(()=>{
